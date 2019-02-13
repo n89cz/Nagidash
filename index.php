@@ -85,7 +85,6 @@ while(!feof($data_source)){ //begin while through nagios status.dat
 
      if ($check==1){ //if for final array building
 	$ttlcount++;
-	echo("ttlcoun-add-1");
     
     if ($state_array[$ttlcount]==2){ //if for state being critical
 	$critcount++;
