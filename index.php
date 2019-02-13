@@ -54,6 +54,7 @@ while(!feof($data_source)){ //begin while through nagios status.dat
 
     $servicepos = strpos($line,$service_des);
     $hostpos = strpos($line,$hostname);
+    $currpos = strpos($line,$curr_state);
 
     if ($servicepos!==false){
 	 $servicecount++;
@@ -71,15 +72,29 @@ while(!feof($data_source)){ //begin while through nagios status.dat
 
     if ($currpos!==false){
 	$curr_state_count++;
-	$statearray[$curr_state_count]=substr($line,strpos($line,'=')+1,strlen($line));
+	$state_array[$curr_state_count]=substr($line,strpos($line,'=')+1,strlen($line));
 	$check=1;
     }
     $check=0;
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 echo '<pre>'; print_r($service_array); echo '</pre>';
 echo '<pre>'; print_r($host_array); echo '</pre>';
+echo '<pre>'; print_r($state_array); echo '</pre>';
 
 fclose($data_source);
 ?>
