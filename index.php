@@ -37,10 +37,15 @@ $state_array = array();
 
 $critical_array = array();
 
+$finalcritarray = array();
+
 //loop counts
 $servicecount = 0;
 $host_count = 0;
 $curr_state_count = 0;
+$critcoun = 0;
+$ttlcount = 0;
+
 
 //we want to look for these items in status.dat
 $hostname = 'host_name=';
@@ -75,20 +80,36 @@ while(!feof($data_source)){ //begin while through nagios status.dat
 	$state_array[$curr_state_count]=substr($line,strpos($line,'=')+1,strlen($line));
 	$check=1;
     }
-    $check=0;
+    //$check=0;
+
+
+     if ($check==1){ //if for final array building
+	$ttlcount++;
+	echo("ttlcoun-add-1");
+    
+    if ($state_array[$ttlcount]==2){ //if for state being critical
+	$critcount++;
+	echo($critcount);
+    }
+    $finalcritarray[$critcount]=$state_array[$ttlcount].",".$host_array[$ttlcount].",".$service_array[$servicecount];
+
+    }//final array build if end
+
+//while loop end
+}
+
+
+
+
+for ($l = 1; $l <= $critcount; $l++) {
+  //dashdisplay($finalcritarray[$l],$collastcheck,$colhost,$colstatusinfo,$colservice);
 }
 
 
 
 
 
-
-
-
-
-
-
-
+echo '<pre>'; print_r($finalcritarray); echo '</pre>';
 
 
 
