@@ -34,6 +34,8 @@ $refresh_rate = 360;
 $service_array = array();
 $host_array = array();
 $state_array = array();
+$plugin_array = array();
+$state_array = array();
 
 $critical_array = array();
 
@@ -45,6 +47,7 @@ $host_count = 0;
 $curr_state_count = 0;
 $critcoun = 0;
 $ttlcount = 0;
+$plugin_count = 0;
 
 
 //we want to look for these items in status.dat
@@ -54,43 +57,53 @@ $curr_state = 'current_state=';
 $plugin_out = 'plugin_output=';
 $last_check = 'last_check=';
 
-while(!feof($data_source)){ //begin while through nagios status.dat
+while(!feof($data_source)){ //while through status.dat
     $line = fgets($data_source);
 
     $servicepos = strpos($line,$service_des);
     $hostpos = strpos($line,$hostname);
     $currpos = strpos($line,$curr_state);
+    $plugpos = strpos($line,$plugin_out);
 
-    if ($servicepos!==false){
-	 $servicecount++;
-         $service_array[$servicecount]=substr($line,strpos($line,'=')+1,strlen($line));;
-         $check=1;
-    }
-    $check=0;
 
     if ($hostpos!==false){
 	$host_count++;
-	$host_array[$host_count]=substr($line,strpos($line,'=')+1,strlen($line));;
+	$host_array[$host_count]=substr($line,strpos($line,'=')+1,strlen($line));
 	$check=1;
-    }
+	}
     $check=0;
 
+    if ($servicepos!==false){
+	$servicecount++;
+        $service_array[$servicecount]=substr($line,strpos($line,'=')+1,strlen($line));
+        $check=1;
+	}
+    $check=0;
+
+    if ($plugpos!==false){
+	$plugin_count++;
+	$plugin_array[$plugin_count]=substr($line,strpos($line,'=')+1,strlen($line));
+	$check=1;
+	}
+	$check=0;
+	
     if ($currpos!==false){
 	$curr_state_count++;
 	$state_array[$curr_state_count]=substr($line,strpos($line,'=')+1,strlen($line));
 	$check=1;
-    }
+	}
     //$check=0;
 
 
-     if ($check==1){ //if for final array building
+    if ($check==1){ //if for final array building
 	$ttlcount++;
-    
+
     if ($state_array[$ttlcount]==2){ //if for state being critical
 	$critcount++;
 	echo($critcount);
-    }
-    $finalcritarray[$critcount]=$state_array[$ttlcount].",".$host_array[$ttlcount].",".$service_array[$servicecount];
+    
+    $finalcritarray[$critcount]=$state_array[$ttlcount] . $host_array[$ttlcount] . $service_array[$servicecount];
+	}
 
     }//final array build if end
 
@@ -102,6 +115,7 @@ while(!feof($data_source)){ //begin while through nagios status.dat
 
 for ($l = 1; $l <= $critcount; $l++) {
   //dashdisplay($finalcritarray[$l],$collastcheck,$colhost,$colstatusinfo,$colservice);
+ //echo();
 }
 
 
@@ -111,16 +125,32 @@ for ($l = 1; $l <= $critcount; $l++) {
 echo '<pre>'; print_r($finalcritarray); echo '</pre>';
 
 
+//echo '<pre>'; print_r($service_array); echo '</pre>';
+//echo '<pre>'; print_r($host_array); echo '</pre>';
+//echo '<pre>'; print_r($state_array); echo '</pre>';
 
-echo '<pre>'; print_r($service_array); echo '</pre>';
-echo '<pre>'; print_r($host_array); echo '</pre>';
-echo '<pre>'; print_r($state_array); echo '</pre>';
+//foreach($results['data'] as $result) {
+//    echo $result['type'], '<br />';
+//    }
 
 fclose($data_source);
 ?>
 
 
+<div class="container-fluid">
 
+<?php foreach ($finalcritarray as $crit_item) {
+	//echo '<div class="aler alert-danger">' . $crit_item . '</div>'
+
+echo '<div class="alert alert-danger">';
+echo($crit_item);
+echo '</div>';
+
+
+}
+?>
+
+</div>
 
 
 
@@ -141,6 +171,7 @@ fclose($data_source);
 	<div class="alert alert-success">
 	    <strong>Success!</strong> You should <a href="#" class="alert-link">read this message</a>.
 	</div>
+	
     </div>
 
 </body>
