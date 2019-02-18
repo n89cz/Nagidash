@@ -111,27 +111,7 @@ while(!feof($data_source)){ //while through status.dat
 }
 
 
-
-
-for ($l = 1; $l <= $critcount; $l++) {
-  //dashdisplay($finalcritarray[$l],$collastcheck,$colhost,$colstatusinfo,$colservice);
- //echo();
-}
-
-
-
-
-
 echo '<pre>'; print_r($finalcritarray); echo '</pre>';
-
-
-//echo '<pre>'; print_r($service_array); echo '</pre>';
-//echo '<pre>'; print_r($host_array); echo '</pre>';
-//echo '<pre>'; print_r($state_array); echo '</pre>';
-
-//foreach($results['data'] as $result) {
-//    echo $result['type'], '<br />';
-//    }
 
 fclose($data_source);
 ?>
@@ -139,13 +119,13 @@ fclose($data_source);
 
 <div class="container-fluid">
 
+<h6><?php echo($page_title); echo(" "); echo($current_date); ?></h6>
+
 <?php foreach ($finalcritarray as $crit_item) {
-	//echo '<div class="aler alert-danger">' . $crit_item . '</div>'
 
-echo '<div class="alert alert-danger">';
-echo($crit_item);
-echo '</div>';
-
+	echo '<div class="alert alert-danger">';
+	echo($crit_item);
+	echo '</div>';
 
 }
 ?>
@@ -154,9 +134,7 @@ echo '</div>';
 
 
 
-
-
-
+<!--
     <div class="container-fluid">
 	<h6><?php echo($page_title); echo(" "); echo($current_date); ?></h6>
 
@@ -173,6 +151,9 @@ echo '</div>';
 	</div>
 	
     </div>
+
+-->
+
 
 </body>
 </html>
