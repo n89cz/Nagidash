@@ -42,7 +42,7 @@ $critical_array = array();
 $finalcritarray = array();
 
 //loop counts
-$servicecount = 0;
+$service_count = 0;
 $host_count = 0;
 $curr_state_count = 0;
 $critcoun = 0;
@@ -74,8 +74,8 @@ while(!feof($data_source)){ //while through status.dat
     $check=0;
 
     if ($servicepos!==false){
-	$servicecount++;
-        $service_array[$servicecount]=substr($line,strpos($line,'=')+1,strlen($line));
+	$service_count++;
+        $service_array[$service_count]=substr($line,strpos($line,'=')+1,strlen($line));
         $check=1;
 	}
     $check=0;
@@ -92,7 +92,6 @@ while(!feof($data_source)){ //while through status.dat
 	$state_array[$curr_state_count]=substr($line,strpos($line,'=')+1,strlen($line));
 	$check=1;
 	}
-    //$check=0;
 
 
     if ($check==1){ //if for final array building
@@ -101,8 +100,8 @@ while(!feof($data_source)){ //while through status.dat
     if ($state_array[$ttlcount]==2){ //if for state being critical
 	$critcount++;
 	echo($critcount);
-    
-    $finalcritarray[$critcount]=$state_array[$ttlcount] . $host_array[$ttlcount] . $service_array[$servicecount];
+
+	$finalcritarray[$critcount]=$host_array[$ttlcount] . $plugin_array[$ttlcount] . $service_array[$servicecount];
 	}
 
     }//final array build if end
