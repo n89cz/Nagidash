@@ -204,7 +204,7 @@ fclose($data_source);
 <h6><?php echo($page_title); echo(" "); echo($current_date); ?></h6>
 
 <?php
-if (empty($finalwarnarray)) {
+if (empty($finalwarnarray)) || (empty($finalcritarray)) {
      echo("no warning or critical items");
 }
 
