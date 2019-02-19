@@ -191,7 +191,7 @@ $ackpos = strpos($line,$ackcheck);
 }//end while loop through nagios status.dat
 
 
-echo '<pre>'; print_r($finalcritarray); echo '</pre>';
+//echo '<pre>'; print_r($finalcritarray); echo '</pre>';
 
 fclose($data_source);
 ?>
@@ -206,7 +206,7 @@ fclose($data_source);
 <?php
 if (empty($finalwarnarray) && empty($finalcritarray)) {
     echo '<div class="alert alert-success">';
-    echo '<strong>OK</strong>';
+    echo '<strong>OK - no issue detected whatsoever</strong>';
     echo '</div>';
 
 }
@@ -226,54 +226,8 @@ else {
     }
 }
 
-
-//show items in critical status
-foreach ($finalcritarray as $crit_item) {
-    echo '<div class="alert alert-danger">';
-    echo($crit_item);
-    echo '</div>';
-}
-
-//show item in warning status
-foreach ($finalwarnarray as $warn_item) {
-    echo '<div class="alert alert-warning">';
-    echo($warn_item);
-    echo '</div>';
-}
-
-
 ?>
 
-
-
-
 </div>
-
-
-
-<!--
-    <div class="container-fluid">
-	<h6><?php echo($page_title); echo(" "); echo($current_date); ?></h6>
-
-	<div class="alert alert-danger">
-	    <strong>Danger!</strong> You should <a href="#" class="alert-link">read this message</a>.
-	</div>
-	
-	<d
-	
-	<div class="alert alert-danger">
-	iv class="alert alert-warning">7
-	     <strong>Warning!</strong> You should <a href="#" class="alert-link">read this message</a>.
-	</div>
-	
-	<div class="alert alert-success">
-	    <strong>Success!</strong> You should <a href="#" class="alert-link">read this message</a>.
-	</div>
-	
-    </div>
-
--->
-
-
 </body>
 </html>
