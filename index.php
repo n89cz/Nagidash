@@ -178,7 +178,7 @@ $ackpos = strpos($line,$ackcheck);
            $ackarray[$ttlcount]="0";
           }
 
-         $finalcritarray[$critcount]=$statearray[$ttlcount].",".$ackarray[$ttlcount].",".$checkarray[$ttlcount].",".$hostarray[$ttlcount].",".$pluginarray[$ttlcount].",".$servicearray[$servicecount];
+         $finalcritarray[$critcount]=$hostarray[$ttlcount] ." - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount];
         }
        }  //end if for active checks being enabled
 
