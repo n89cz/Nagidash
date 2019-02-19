@@ -205,9 +205,26 @@ fclose($data_source);
 
 <?php
 if (empty($finalwarnarray) && empty($finalcritarray)) {
-     echo("no warning or critical items");
-}
+    echo '<div class="alert alert-success">';
+    echo '<strong>OK</strong>';
+    echo '</div>';
 
+}
+else {
+    //show items in critical status
+    foreach ($finalcritarray as $crit_item) {
+	echo '<div class="alert alert-danger">';
+	echo($crit_item);
+	echo '</div>';
+    }
+
+    //show item in warning status
+    foreach ($finalwarnarray as $warn_item) {
+	echo '<div class="alert alert-warning">';
+	echo($warn_item);
+	echo '</div>';
+    }
+}
 
 
 //show items in critical status
