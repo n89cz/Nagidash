@@ -121,13 +121,13 @@ $ackpos = strpos($line,$ackcheck);
        }
       $check=0;
 
-//       if ($servicearray[$servicecount]!=""){ //if the host has a service being checked
-//       if ($dispos!==false){
-//        $discount++;
-//        $disarray[$discount]=substr($line,strpos($line,'=')+1,strlen($line));
-//        $check=1;
-//       }
-//       $check=0;
+       if ($servicearray[$servicecount]!=""){ //if the host has a service being checked
+       if ($dispos!==false){
+        $discount++;
+        $disarray[$discount]=substr($line,strpos($line,'=')+1,strlen($line));
+        $check=1;
+       }
+       $check=0;
 
        if ($ackpos!==false){
         $ackcount++;
@@ -180,7 +180,7 @@ $ackpos = strpos($line,$ackcheck);
 
          $finalcritarray[$critcount]=$statearray[$ttlcount].",".$ackarray[$ttlcount].",".$checkarray[$ttlcount].",".$hostarray[$ttlcount].",".$pluginarray[$ttlcount].",".$servicearray[$servicecount];
         }
-//       }  //end if for active checks being enabled
+       }  //end if for active checks being enabled
 
         //if active checks are 0 then checking is disabled (0), the 3 represents the disabled state
         if ($disarray[$ttlcount]==0){ 
