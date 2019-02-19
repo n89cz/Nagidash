@@ -204,9 +204,13 @@ fclose($data_source);
 <h6><?php echo($page_title); echo(" "); echo($current_date); ?></h6>
 
 <?php
-if (empty($finalwarnarray)) || empty($finalcritarray) {
-     echo("no critical or warn state");
+if (empty($finalwarnarray)) || (empty($finalcritarray)) {
+     echo("no warning or critical items");
 }
+else {
+    echo("chyba existuje");
+}
+
 
 
 //show items in critical status
