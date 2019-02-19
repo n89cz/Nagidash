@@ -5,7 +5,7 @@
 $data_source = fopen("/var/spool/nagios/status.dat", "r") or exit("I am not able to open status.dat file. Is the path correct?");
 $page_title = "Nagidash";
 $current_date = date('Y-m-d H:i:s');
-$refresh_rate = 360;
+$refresh_rate = 30;
 ?>
 
 <!DOCTYPE html>
