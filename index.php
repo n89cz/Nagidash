@@ -203,14 +203,26 @@ fclose($data_source);
 
 <h6><?php echo($page_title); echo(" "); echo($current_date); ?></h6>
 
-<?php foreach ($finalcritarray as $crit_item) {
-
-	echo '<div class="alert alert-danger">';
-	echo($crit_item);
-	echo '</div>';
-
+<?php
+//show items in critical status
+foreach ($finalcritarray as $crit_item) {
+    echo '<div class="alert alert-danger">';
+    echo($crit_item);
+    echo '</div>';
 }
+
+//show item in warning status
+foreach ($finalwarnarray as $warn_item) {
+    echo '<div class="alert alert-warning">';
+    echo($warn_item);
+    echo '</div>;
+}
+
+
 ?>
+
+
+
 
 </div>
 
