@@ -119,15 +119,15 @@ $ackpos = strpos($line,$ackcheck);
         $checkarray[$lastcount]=substr($line,strpos($line,'=')+1,strlen($line));
         $check=1;
        }
-
       $check=0;
-       if ($servicearray[$servicecount]!=""){ //if the host has a service being checked
-       if ($dispos!==false){
-        $discount++;
-        $disarray[$discount]=substr($line,strpos($line,'=')+1,strlen($line));
-        $check=1;
-       }
-       $check=0;
+
+//       if ($servicearray[$servicecount]!=""){ //if the host has a service being checked
+//       if ($dispos!==false){
+//        $discount++;
+//        $disarray[$discount]=substr($line,strpos($line,'=')+1,strlen($line));
+//        $check=1;
+//       }
+//       $check=0;
 
        if ($ackpos!==false){
         $ackcount++;
