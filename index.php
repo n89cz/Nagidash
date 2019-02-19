@@ -204,6 +204,11 @@ fclose($data_source);
 <h6><?php echo($page_title); echo(" "); echo($current_date); ?></h6>
 
 <?php
+if (empty($finalwarnarray)) {
+     echo("warn array is empty");
+}
+
+
 //show items in critical status
 foreach ($finalcritarray as $crit_item) {
     echo '<div class="alert alert-danger">';
