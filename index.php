@@ -215,7 +215,7 @@ foreach ($finalcritarray as $crit_item) {
 foreach ($finalwarnarray as $warn_item) {
     echo '<div class="alert alert-warning">';
     echo($warn_item);
-    echo '</div>;
+    echo '</div>';
 }
 
 
