@@ -168,7 +168,7 @@ $ackpos = strpos($line,$ackcheck);
             $ackarray[$ttlcount]=0;
            }
 
-          $finalwarnarray[$warncount]=$statearray[$ttlcount].",".$ackarray[$ttlcount].",".$checkarray[$ttlcount].",".$hostarray[$ttlcount].",".$pluginarray[$ttlcount].",".$servicearray[$servicecount];
+          $finalwarnarray[$warncount]=$hostarray[$ttlcount]." - ". $servicearray[$servicecount]. " - " .$pluginarray[$ttlcount];
         }
 
         if ($statearray[$ttlcount]==2){ //if for state being critical
