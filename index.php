@@ -180,7 +180,7 @@ $ackpos = strpos($line,$ackcheck);
 
          $finalcritarray[$critcount]=$statearray[$ttlcount].",".$ackarray[$ttlcount].",".$checkarray[$ttlcount].",".$hostarray[$ttlcount].",".$pluginarray[$ttlcount].",".$servicearray[$servicecount];
         }
-       }  //end if for active checks being enabled
+//       }  //end if for active checks being enabled
 
         //if active checks are 0 then checking is disabled (0), the 3 represents the disabled state
         if ($disarray[$ttlcount]==0){ 
