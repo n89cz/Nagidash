@@ -207,9 +207,6 @@ fclose($data_source);
 if (empty($finalwarnarray)) || (empty($finalcritarray)) {
      echo("no warning or critical items");
 }
-else {
-    echo("chyba existuje");
-}
 
 
 
