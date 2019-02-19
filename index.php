@@ -30,84 +30,204 @@ $refresh_rate = 360;
 <body>
 <?php
 
+
+
 //arrays for different fields in nagios status.dat
-$service_array = array();
-$host_array = array();
-$state_array = array();
-$plugin_array = array();
-$state_array = array();
+$hostarray = array();
+$servicearray = array();
+$statearray = array();
+$pluginarray = array();
+$checkarray = array();
+$ackarray = array();
+$disarray = array();
 
-$critical_array = array();
-
+//arrays for status of hosts/services
+$finaluparray = array();
+$finalwarnarray = array();
 $finalcritarray = array();
+$finaldisarray = array();
 
-//loop counts
-$service_count = 0;
-$host_count = 0;
-$curr_state_count = 0;
-$critcoun = 0;
-$ttlcount = 0;
-$plugin_count = 0;
-
-
-//we want to look for these items in status.dat
+//field to check in nagios status.dat
 $hostname = 'host_name=';
-$service_des = 'service_description=';
-$curr_state = 'current_state=';
-$plugin_out = 'plugin_output=';
-$last_check = 'last_check=';
+$hostgroup= 'host_group=';
+$servicedes = 'service_description=';
+$currstate = 'current_state=';
+$pluginout = 'plugin_output=';
+$lastcheck = 'last_check=';
+$ackcheck = 'been_acknowledged=';
+$discheck = 'active_checks_enabled=';
 
-while(!feof($data_source)){ //while through status.dat
-    $line = fgets($data_source);
+//counters for loops
+$hostcount = 0;
+$servicecount = 0;
+$currcount = 0;
+$plugcount = 0;
+$lastcount = 0;
+$discount = 0;
+$disttlcount = 0;
+$ackcount = 0;
+$ttlcount = 0;
+$check = 0;
+$okcount = 0;
+$warncount = 0;
+$critcount = 0;
 
-    $servicepos = strpos($line,$service_des);
-    $hostpos = strpos($line,$hostname);
-    $currpos = strpos($line,$curr_state);
-    $plugpos = strpos($line,$plugin_out);
+while(!feof($data_source)){ //begin while through nagios status.dat
+$line = fgets($data_source);
 
+//strpos to check for field line by line
+$hostpos = strpos($line,$hostname);
+$servicepos = strpos($line,$servicedes);
+$currpos = strpos($line,$currstate);
+$plugpos = strpos($line,$pluginout);
+$lastpos = strpos($line,$lastcheck);
+$dispos = strpos($line,$discheck);
+$ackpos = strpos($line,$ackcheck);
 
-    if ($hostpos!==false){
-	$host_count++;
-	$host_array[$host_count]=substr($line,strpos($line,'=')+1,strlen($line));
-	$check=1;
-	}
-    $check=0;
-
-    if ($servicepos!==false){
-	$service_count++;
-        $service_array[$service_count]=substr($line,strpos($line,'=')+1,strlen($line));
+       if ($hostpos!==false){
+        $hostcount++;
+        $hostarray[$hostcount]=substr($line,strpos($line,'=')+1,strlen($line));
         $check=1;
-	}
-    $check=0;
+       }      
+      
+       $check=0;
+      
+       if ($servicepos!==false){
+        $servicecount++;
+        $servicearray[$servicecount]=substr($line,strpos($line,'=')+1,strlen($line));
+        $check=1;
+       }
 
-    if ($plugpos!==false){
-	$plugin_count++;
-	$plugin_array[$plugin_count]=substr($line,strpos($line,'=')+1,strlen($line));
-	$check=1;
-	}
-	$check=0;
-	
-    if ($currpos!==false){
-	$curr_state_count++;
-	$state_array[$curr_state_count]=substr($line,strpos($line,'=')+1,strlen($line));
-	$check=1;
-	}
+       $check=0;
+      
+       if ($currpos!==false){
+        $currcount++;
+        $statearray[$currcount]=substr($line,strpos($line,'=')+1,strlen($line));
+        $check=1;
+       }
+
+       $check=0;
+
+       if ($plugpos!==false){
+        if (strpos($line,"long_plugin_output=")===false){
+         $plugcount++;
+        $pluginarray[$plugcount]=substr($line,strpos($line,'=')+1,strlen($line));
+         $check=1;
+        }
+       }
+
+       $check=0;
+      
+       if ($lastpos!==false){
+        $lastcount++;
+        $checkarray[$lastcount]=substr($line,strpos($line,'=')+1,strlen($line));
+        $check=1;
+       }
+
+      $check=0;
+       if ($servicearray[$servicecount]!=""){ //if the host has a service being checked
+       if ($dispos!==false){
+        $discount++;
+        $disarray[$discount]=substr($line,strpos($line,'=')+1,strlen($line));
+        $check=1;
+       }
+       $check=0;
+
+       if ($ackpos!==false){
+        $ackcount++;
+        $ackarray[$ackcount]=substr($line,strpos($line,'=')+1,strlen($line));
+        $check=1;
+       }
+       }
+
+       if ($servicearray[$servicecount]==""){ //if the host has no service being checked
+        if ($ackpos!==false){
+        $ackcount++;
+        $ackarray[$ackcount]=substr($line,strpos($line,'=')+1,strlen($line));
+        $check=1;
+       }
+
+       $check=0;
+
+       if ($dispos!==false){
+        $discount++;
+        $disarray[$discount]=substr($line,strpos($line,'=')+1,strlen($line));
+        $check=1;
+        }     
+       }      
+
+       if ($check==1){ //if for final array building
+        $ttlcount++;
+      
+        if ($disarray[$ttlcount]==1){ //if for active checks being enabled (1)
+
+         if ($statearray[$ttlcount]==0){ //if for state being up/ok (0 for acknowledgements, you dont acknowledge an up service/host)
+          $okcount++;
+          $finaluparray[$okcount]=$statearray[$ttlcount].",0,".$checkarray[$ttlcount].",".$hostarray[$ttlcount].",".$pluginarray[$ttlcount].",".$servicearray[$servicecount];
+         }
+
+         if ($statearray[$ttlcount]==1){ //if for state being warning 
+          $warncount++;
+           if ($ackarray[$ttlcount]==""){
+            $ackarray[$ttlcount]=0;
+           }
+      
+          $finalwarnarray[$warncount]=$statearray[$ttlcount].",".$ackarray[$ttlcount].",".$checkarray[$ttlcount].",".$hostarray[$ttlcount].",".$pluginarray[$ttlcount].",".$servicearray[$servicecount];
+        }
+
+        if ($statearray[$ttlcount]==2){ //if for state being critical
+         $critcount++;
+
+          if ($ackarray[$ttlcount]==""){
+           $ackarray[$ttlcount]="0";
+          }
+
+         $finalcritarray[$critcount]=$statearray[$ttlcount].",".$ackarray[$ttlcount].",".$checkarray[$ttlcount].",".$hostarray[$ttlcount].",".$pluginarray[$ttlcount].",".$servicearray[$servicecount];
+        }
+       }  //end if for active checks being enabled
+
+        //if active checks are 0 then checking is disabled (0), the 3 represents the disabled state
+        if ($disarray[$ttlcount]==0){ 
+         $disttlcount++;
+         $finaldisarray[$disttlcount]="3,0,".$checkarray[$ttlcount].",".$hostarray[$ttlcount].",".$pluginarray[$ttlcount].",".$servicearray[$servicecount];
+        }
+      }  //end if for final array building
+}//end while loop through nagios status.dat
 
 
-    if ($check==1){ //if for final array building
-	$ttlcount++;
 
-    if ($state_array[$ttlcount]==2){ //if for state being critical
-	$critcount++;
-	echo($critcount);
 
-	$finalcritarray[$critcount]=$host_array[$ttlcount] . $plugin_array[$ttlcount] . $service_array[$servicecount];
-	}
 
-    }//final array build if end
 
-//while loop end
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 echo '<pre>'; print_r($finalcritarray); echo '</pre>';
@@ -117,6 +237,8 @@ fclose($data_source);
 
 
 <div class="container-fluid">
+
+
 
 <h6><?php echo($page_title); echo(" "); echo($current_date); ?></h6>
 
@@ -141,7 +263,10 @@ fclose($data_source);
 	    <strong>Danger!</strong> You should <a href="#" class="alert-link">read this message</a>.
 	</div>
 	
-	<div class="alert alert-warning">7
+	<d
+	
+	<div class="alert alert-danger">
+	iv class="alert alert-warning">7
 	     <strong>Warning!</strong> You should <a href="#" class="alert-link">read this message</a>.
 	</div>
 	
