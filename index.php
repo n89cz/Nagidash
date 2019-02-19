@@ -204,8 +204,8 @@ fclose($data_source);
 <h6><?php echo($page_title); echo(" "); echo($current_date); ?></h6>
 
 <?php
-if (empty($finalwarnarray)) {
-     echo("warn array is empty");
+if (empty($finalwarnarray)) || empty($finalcritarray) {
+     echo("no critical or warn state");
 }
 
 
