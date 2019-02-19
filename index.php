@@ -88,24 +88,21 @@ $ackpos = strpos($line,$ackcheck);
         $hostcount++;
         $hostarray[$hostcount]=substr($line,strpos($line,'=')+1,strlen($line));
         $check=1;
-       }      
-      
+       }
        $check=0;
-      
+
        if ($servicepos!==false){
         $servicecount++;
         $servicearray[$servicecount]=substr($line,strpos($line,'=')+1,strlen($line));
         $check=1;
        }
-
        $check=0;
-      
+
        if ($currpos!==false){
         $currcount++;
         $statearray[$currcount]=substr($line,strpos($line,'=')+1,strlen($line));
         $check=1;
        }
-
        $check=0;
 
        if ($plugpos!==false){
@@ -115,9 +112,8 @@ $ackpos = strpos($line,$ackcheck);
          $check=1;
         }
        }
-
        $check=0;
-      
+
        if ($lastpos!==false){
         $lastcount++;
         $checkarray[$lastcount]=substr($line,strpos($line,'=')+1,strlen($line));
@@ -153,12 +149,12 @@ $ackpos = strpos($line,$ackcheck);
         $discount++;
         $disarray[$discount]=substr($line,strpos($line,'=')+1,strlen($line));
         $check=1;
-        }     
-       }      
+        }
+       }
 
        if ($check==1){ //if for final array building
         $ttlcount++;
-      
+
         if ($disarray[$ttlcount]==1){ //if for active checks being enabled (1)
 
          if ($statearray[$ttlcount]==0){ //if for state being up/ok (0 for acknowledgements, you dont acknowledge an up service/host)
@@ -171,7 +167,7 @@ $ackpos = strpos($line,$ackcheck);
            if ($ackarray[$ttlcount]==""){
             $ackarray[$ttlcount]=0;
            }
-      
+
           $finalwarnarray[$warncount]=$statearray[$ttlcount].",".$ackarray[$ttlcount].",".$checkarray[$ttlcount].",".$hostarray[$ttlcount].",".$pluginarray[$ttlcount].",".$servicearray[$servicecount];
         }
 
@@ -193,41 +189,6 @@ $ackpos = strpos($line,$ackcheck);
         }
       }  //end if for final array building
 }//end while loop through nagios status.dat
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 echo '<pre>'; print_r($finalcritarray); echo '</pre>';
