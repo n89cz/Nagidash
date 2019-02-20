@@ -24,3 +24,5 @@ TODO:
     Undefined offset: 0 in /var/www/html/nagidash/index.php on line 124
 
     This need to be fixed so i does not flood the errorlog
+    
+    3. Maybe I could add web browser notifications
