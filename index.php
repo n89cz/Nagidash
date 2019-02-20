@@ -206,7 +206,7 @@ fclose($data_source);
 <?php
 if (empty($finalwarnarray) && empty($finalcritarray)) {
     echo '<div class="alert alert-success">';
-    echo '<strong>OK - no issue detected whatsoever</strong>';
+    echo '<strong>OK - no issue detected</strong>';
     echo '</div>';
 
 }
