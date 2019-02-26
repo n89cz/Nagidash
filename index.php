@@ -46,6 +46,7 @@ $finaluparray = array();
 $finalwarnarray = array();
 $finalcritarray = array();
 $finaldisarray = array();
+$finalunknownarray = array();
 
 //field to check in nagios status.dat
 $hostname = 'host_name=';
@@ -71,6 +72,7 @@ $check = 0;
 $okcount = 0;
 $warncount = 0;
 $critcount = 0;
+$unknowncout = 0;
 
 while(!feof($data_source)){ //begin while through nagios status.dat
 $line = fgets($data_source);
