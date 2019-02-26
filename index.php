@@ -218,6 +218,10 @@ else {
 	echo '</div>';
     }
 
+    //show items in unknown state
+    foreach (
+    
+
     //show item in warning status
     foreach ($finalwarnarray as $warn_item) {
 	echo '<div class="alert alert-warning">';
