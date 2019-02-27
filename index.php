@@ -204,7 +204,8 @@ $ackpos = strpos($line,$ackcheck);
 }//end while loop through nagios status.dat
 
 
-echo '<pre>'; print_r($finalunknownarray); echo '</pre>';
+//next line for debugging purposes
+//echo '<pre>'; print_r($finalunknownarray); echo '</pre>';
 
 
 fclose($data_source);
