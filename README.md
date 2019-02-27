@@ -13,7 +13,7 @@ If you have any wishes let me know.
 
 TODO:
 
-1. Include also items which are in unknown state
+1. Include also items which are in unknown state - DONE
 
 2. In httpd errorlog is plenty of these errors: 
 
