@@ -46,6 +46,7 @@ $finaluparray = array();
 $finalwarnarray = array();
 $finalcritarray = array();
 $finaldisarray = array();
+$finalunknownarray = array();
 
 //field to check in nagios status.dat
 $hostname = 'host_name=';
@@ -71,6 +72,7 @@ $check = 0;
 $okcount = 0;
 $warncount = 0;
 $critcount = 0;
+$unknowncout = 0;
 
 while(!feof($data_source)){ //begin while through nagios status.dat
 $line = fgets($data_source);
@@ -179,7 +181,18 @@ $ackpos = strpos($line,$ackcheck);
           }
 
          $finalcritarray[$critcount]=$hostarray[$ttlcount] ." - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount];
-        }
+        }// end if for state being critical
+	
+	//if for unknown state
+	if ($statearray[$ttlcount]==3) {
+	    $unknowncount++;
+	    if ($ackarray[$ttlcount]=="") {
+		$ackarray[$ttlcount]=0;
+	    }
+	$finalunknownarray[$unknowncout]=$hostarray[$ttlcount] . " - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount];
+	}
+	
+
        }  //end if for active checks being enabled
 
         //if active checks are 0 then checking is disabled (0), the 3 represents the disabled state
@@ -191,20 +204,19 @@ $ackpos = strpos($line,$ackcheck);
 }//end while loop through nagios status.dat
 
 
-//echo '<pre>'; print_r($finalcritarray); echo '</pre>';
+//next line for debugging purposes
+//echo '<pre>'; print_r($finalunknownarray); echo '</pre>';
+
 
 fclose($data_source);
 ?>
 
-
 <div class="container-fluid">
-
-
 
 <h6><?php echo($page_title); echo(" "); echo($current_date); ?></h6>
 
 <?php
-if (empty($finalwarnarray) && empty($finalcritarray)) {
+if (empty($finalwarnarray) && empty($finalcritarray) && empty($finalunknownarray)) {
     echo '<div class="alert alert-success">';
     echo '<strong>OK - no issue detected</strong>';
     echo '</div>';
@@ -219,8 +231,11 @@ else {
     }
 
     //show items in unknown state
-    foreach (
-    
+    foreach ($finalunknownarray as $unknown_item) {
+	echo '<div class="alert alert-danger">';
+	echo($unknown_item);
+	echo '</div>';
+    }
 
     //show item in warning status
     foreach ($finalwarnarray as $warn_item) {
