@@ -25,4 +25,4 @@ TODO:
 
     This need to be fixed so i does not flood the errorlog
     
-3. Maybe I could add web browser notifications
+3. Webbrowser push notifications?
