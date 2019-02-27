@@ -204,15 +204,13 @@ $ackpos = strpos($line,$ackcheck);
 }//end while loop through nagios status.dat
 
 
-//echo '<pre>'; print_r($finalcritarray); echo '</pre>';
+echo '<pre>'; print_r($finalunknownarray); echo '</pre>';
+
 
 fclose($data_source);
 ?>
 
-
 <div class="container-fluid">
-
-
 
 <h6><?php echo($page_title); echo(" "); echo($current_date); ?></h6>
 
