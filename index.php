@@ -215,7 +215,7 @@ fclose($data_source);
 <h6><?php echo($page_title); echo(" "); echo($current_date); ?></h6>
 
 <?php
-if (empty($finalwarnarray) && empty($finalcritarray)) {
+if (empty($finalwarnarray) && empty($finalcritarray) && empty($finalunknownarray)) {
     echo '<div class="alert alert-success">';
     echo '<strong>OK - no issue detected</strong>';
     echo '</div>';
