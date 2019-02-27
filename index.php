@@ -181,7 +181,18 @@ $ackpos = strpos($line,$ackcheck);
           }
 
          $finalcritarray[$critcount]=$hostarray[$ttlcount] ." - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount];
-        }
+        }// end if for state being critical
+	
+	//if for critical state
+	if ($statearray[$$ttlcount]==3) {
+	    $unknowncount++;
+	    if ($ackarray[$ttlcount]=="") {
+		$ackarray[$ttlcount]=0;
+	    }
+	$finalunknownarray[$unknowncout]=$hostarray[$ttlcount] . " - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount];
+	}
+	
+
        }  //end if for active checks being enabled
 
         //if active checks are 0 then checking is disabled (0), the 3 represents the disabled state
@@ -221,8 +232,11 @@ else {
     }
 
     //show items in unknown state
-    foreach (
-    
+    foreach ($finalunknownarray as $unknown_item) {
+	echo '<div class="alert alert-danger">';
+	echo($unknown_item);
+	echo '</div>';
+    }
 
     //show item in warning status
     foreach ($finalwarnarray as $warn_item) {
