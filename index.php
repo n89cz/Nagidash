@@ -183,8 +183,8 @@ $ackpos = strpos($line,$ackcheck);
          $finalcritarray[$critcount]=$hostarray[$ttlcount] ." - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount];
         }// end if for state being critical
 	
-	//if for critical state
-	if ($statearray[$$ttlcount]==3) {
+	//if for unknown state
+	if ($statearray[$ttlcount]==3) {
 	    $unknowncount++;
 	    if ($ackarray[$ttlcount]=="") {
 		$ackarray[$ttlcount]=0;
