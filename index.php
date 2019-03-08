@@ -169,7 +169,8 @@ $ackpos = strpos($line,$ackcheck);
            if ($ackarray[$ttlcount]==""){
             $ackarray[$ttlcount]=0;
            }
-
+	    
+        $last_check = date('Y/m/d H:i:s', $checkarray[$lastcount]);
           $finalwarnarray[$warncount]=$hostarray[$ttlcount]." - ". $servicearray[$servicecount]. " - " .$pluginarray[$ttlcount]  . " - " . " Last check: " . $last_check;
         }
 
@@ -179,7 +180,8 @@ $ackpos = strpos($line,$ackcheck);
           if ($ackarray[$ttlcount]==""){
            $ackarray[$ttlcount]="0";
           }
-
+	
+	$last_check = date('Y/m/d H:i:s', $checkarray[$lastcount]);
          $finalcritarray[$critcount]=$hostarray[$ttlcount] ." - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount]  . " - " . " Last check: " . $last_check;
         }// end if for state being critical
 	
