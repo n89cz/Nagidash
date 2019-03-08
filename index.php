@@ -189,7 +189,7 @@ $ackpos = strpos($line,$ackcheck);
 	    if ($ackarray[$ttlcount]=="") {
 		$ackarray[$ttlcount]=0;
 	    }
-	$finalunknownarray[$unknowncout]=$hostarray[$ttlcount] . " - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount] . " - " . $checkarray[$lastcount];
+	$finalunknownarray[$unknowncout]=$hostarray[$ttlcount] . " - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount];
 	}
 	
 
