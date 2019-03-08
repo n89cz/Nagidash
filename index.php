@@ -169,8 +169,9 @@ $ackpos = strpos($line,$ackcheck);
            if ($ackarray[$ttlcount]==""){
             $ackarray[$ttlcount]=0;
            }
-
-          $finalwarnarray[$warncount]=$hostarray[$ttlcount]." - ". $servicearray[$servicecount]. " - " .$pluginarray[$ttlcount];
+	    
+        $last_check = date('Y/m/d H:i:s', $checkarray[$lastcount]);
+          $finalwarnarray[$warncount]=$hostarray[$ttlcount]." - ". $servicearray[$servicecount]. " - " .$pluginarray[$ttlcount]  . " - " . " Last check: " . $last_check;
         }
 
         if ($statearray[$ttlcount]==2){ //if for state being critical
@@ -179,8 +180,9 @@ $ackpos = strpos($line,$ackcheck);
           if ($ackarray[$ttlcount]==""){
            $ackarray[$ttlcount]="0";
           }
-
-         $finalcritarray[$critcount]=$hostarray[$ttlcount] ." - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount];
+	
+	$last_check = date('Y/m/d H:i:s', $checkarray[$lastcount]);
+         $finalcritarray[$critcount]=$hostarray[$ttlcount] ." - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount]  . " - " . " Last check: " . $last_check;
         }// end if for state being critical
 	
 	//if for unknown state
@@ -189,7 +191,8 @@ $ackpos = strpos($line,$ackcheck);
 	    if ($ackarray[$ttlcount]=="") {
 		$ackarray[$ttlcount]=0;
 	    }
-	$finalunknownarray[$unknowncout]=$hostarray[$ttlcount] . " - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount];
+	$last_check = date('Y/m/d H:i:s', $checkarray[$lastcount]);
+	$finalunknownarray[$unknowncout]=$hostarray[$ttlcount] . " - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount] . " - " . " Last check: " . $last_check;
 	}
 	
 
