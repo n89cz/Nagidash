@@ -190,7 +190,7 @@ $ackpos = strpos($line,$ackcheck);
 		$ackarray[$ttlcount]=0;
 	    }
 	$last_check = date('Y/m/d H:i:s', $checkarray[$lastcount]);
-	$finalunknownarray[$unknowncout]=$hostarray[$ttlcount] . " - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount] . " Last check: " . $last_check;
+	$finalunknownarray[$unknowncout]=$hostarray[$ttlcount] . " - ". $servicearray[$servicecount] ." - ". $pluginarray[$ttlcount] . " -  " . . " Last check: " . $last_check;
 	}
 	
 
