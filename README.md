@@ -23,6 +23,7 @@ TODO:
 
     Undefined offset: 0 in /var/www/html/nagidash/index.php on line 124
 
-    This need to be fixed so i does not flood the errorlog</s>
+    This need to be fixed so i does not flood the errorlog
+</s>
     
 3. Webbrowser push notifications?
