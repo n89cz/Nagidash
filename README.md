@@ -15,7 +15,7 @@ TODO:
 
 <s>1. Include also items which are in unknown state - DONE</s>
 
-<s>2. In httpd errorlog is plenty of these errors:
+<s>2. In httpd errorlog is plenty of these errors: For now, this is "solved" by error_reporting(0);
 
     Undefined offset: 0 in /var/www/html/nagidash/index.php on line 124
     
