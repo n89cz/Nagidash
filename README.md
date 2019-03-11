@@ -15,7 +15,7 @@ TODO:
 
 <s>1. Include also items which are in unknown state - DONE</s>
 
-2. In httpd errorlog is plenty of these errors:
+<s>2. In httpd errorlog is plenty of these errors:
 
     Undefined offset: 0 in /var/www/html/nagidash/index.php on line 124
     
@@ -23,6 +23,6 @@ TODO:
 
     Undefined offset: 0 in /var/www/html/nagidash/index.php on line 124
 
-    This need to be fixed so i does not flood the errorlog
+    This need to be fixed so i does not flood the errorlog</s>
     
 3. Webbrowser push notifications?
