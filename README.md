@@ -27,3 +27,5 @@ TODO:
 </s>
     
 3. Webbrowser push notifications?
+
+4.	Add icon for iOS
