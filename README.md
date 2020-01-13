@@ -1,5 +1,7 @@
 # Nagidash
 
+https://travis-ci.org/n89cz/Nagidash
+
 Very simple monitoring dashboard for Nagios where you see only items which return state other then 0.
 
 Nagidash is based on "Nagios Dashboard - PHP" which is presented here (https://exchange.nagios.org/directory/Addons/Frontends-%28GUIs-and-CLIs%29/Web-Interfaces/Nagios-Dashboard--2D-PHP/details#_ga=2.211361109.1353996912.1550563425-409400710.1548750848). It uses 
