@@ -1,6 +1,6 @@
 # Nagidash
 
-https://travis-ci.org/n89cz/Nagidash
+Build status: [![Build Status](https://travis-ci.org/n89cz/Nagidash)
 
 Very simple monitoring dashboard for Nagios where you see only items which return state other then 0.
 
